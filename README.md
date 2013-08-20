@@ -1,4 +1,5 @@
 .xmonad
 =======
 
-My XMonad configuration, using Ubuntu's "XMonad" (12.04) resp. "Gnome with XMonad" (13.04) session
+My XMonad configuration, using Ubuntu's "Gnome with XMonad" session on 12.04
+and 13.04.
