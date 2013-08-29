@@ -20,6 +20,7 @@ main = xmonad gnomeConfig {
         -- open programs on specific workspaces
         className =? "Thunderbird" --> doShift "1",
         className =? "Firefox" --> doShift "2",
+        className =? "Skype" --> doShift "8",
         -- let fullscreen windows cover the Gnome panels
         isFullscreen --> doFullFloat
     ],
