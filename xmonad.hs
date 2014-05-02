@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Config.Gnome
 import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 
 import qualified Data.Map as M
@@ -20,10 +21,14 @@ main = xmonad gnomeConfig {
         -- open programs on specific workspaces
         className =? "Thunderbird" --> doShift "1",
         className =? "Firefox" --> doShift "2",
-        className =? "Skype" --> doShift "8",
-        -- let fullscreen windows cover the Gnome panels
-        isFullscreen --> doFullFloat
+        -- handle fullscreen events
+        fullscreenManageHook
     ],
-    -- remove borders from fullscreen windows (etc.)
-    layoutHook = smartBorders $ layoutHook gnomeConfig
+    handleEventHook = fullscreenEventHook,
+    -- let fullscreen windows cover the Gnome panels
+    -- remove borders from fullscreen (smartBorders, however, does not
+    -- currently be smart enough to detect Firefox as fullscreen, so we still
+    -- have a border around fullscreen Firefox windows when there is another
+    -- window in the same workspace >:() and single windows
+    layoutHook = smartBorders $ fullscreenFull $ layoutHook gnomeConfig
 }
