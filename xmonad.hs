@@ -15,7 +15,10 @@ main = xmonad gnomeConfig {
     -- use Windows instead of Alt key
     modMask = mod4Mask,
     -- add custom key bindings (see above)
-    keys = myKeys <+> keys gnomeConfig,
+    keys = composeAll [
+        keys gnomeConfig,
+        myKeys
+    ],
     manageHook = composeAll [
         manageHook gnomeConfig,
         -- open programs on specific workspaces
