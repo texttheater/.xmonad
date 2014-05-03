@@ -21,8 +21,7 @@ main = xmonad gnomeConfig {
         -- open programs on specific workspaces
         className =? "Thunderbird" --> doShift "1",
         className =? "Firefox" --> doShift "2",
-        -- isFullscreen --> doFullFloat doesn't trigger when Firefox goes
-        -- fullscreen
+        -- notice when well-behaved windows go fullscreen
         fullscreenManageHook
     ],
     handleEventHook = composeAll [
