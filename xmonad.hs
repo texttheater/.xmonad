@@ -25,7 +25,10 @@ main = xmonad gnomeConfig {
         className =? "Thunderbird" --> doShift "1",
         className =? "Firefox" --> doShift "2",
         -- notice when well-behaved windows go fullscreen
-        fullscreenManageHook
+--      fullscreenManageHook, -- doesn't seem to be needed
+        -- let fullscreen windows cover the Gnome panels (needed for YouTube
+        -- videos)
+        isFullscreen --> doFullFloat
     ],
     handleEventHook = composeAll [
         handleEventHook gnomeConfig,
@@ -36,7 +39,7 @@ main = xmonad gnomeConfig {
         -- remove borders from windows that are fullscreen (does not yet work
         -- for Firefox) or the only window on the workspace
         smartBorders $
-        -- let fullscreen windows cover the Gnome panels
+        -- let fullscreen windows cover the Gnome panels (needed for Firefox)
         fullscreenFull $
         layoutHook gnomeConfig
 }
