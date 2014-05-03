@@ -29,7 +29,11 @@ main = xmonad gnomeConfig {
         -- notice when Firefox goes fullscreen
         fullscreenEventHook
     ],
-    -- let fullscreen windows cover the Gnome panels
-    -- remove borders from fullscreen windows (does not work with Firefox)
-    layoutHook = smartBorders $ fullscreenFull $ layoutHook gnomeConfig
+    layoutHook = 
+        -- remove borders from windows that are fullscreen (does not yet work
+        -- for Firefox) or the only window on the workspace
+        smartBorders $
+        -- let fullscreen windows cover the Gnome panels
+        fullscreenFull $
+        layoutHook gnomeConfig
 }
