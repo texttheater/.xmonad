@@ -6,7 +6,7 @@ import XMonad.Layout.NoBorders
 
 import qualified Data.Map as M
 
--- use Win-o rather than Win-p for gnomeRun to avoid this bug:
+-- use Win-o rather than Win-p for gnomeRun to work around this bug:
 -- http://ubuntuforums.org/showthread.php?t=2158104&p=12859037#post12859037
 myKeys (XConfig {modMask = mod4Mask}) = M.fromList $
     [ ((mod4Mask, xK_o), gnomeRun) ]
@@ -21,14 +21,16 @@ main = xmonad gnomeConfig {
         -- open programs on specific workspaces
         className =? "Thunderbird" --> doShift "1",
         className =? "Firefox" --> doShift "2",
-        -- handle fullscreen events
+        -- isFullscreen --> doFullFloat doesn't trigger when Firefox goes
+        -- fullscreen
         fullscreenManageHook
     ],
-    handleEventHook = fullscreenEventHook,
+    handleEventHook = composeAll [
+        handleEventHook gnomeConfig,
+        -- notice when Firefox goes fullscreen
+        fullscreenEventHook
+    ],
     -- let fullscreen windows cover the Gnome panels
-    -- remove borders from fullscreen (smartBorders, however, does not
-    -- currently be smart enough to detect Firefox as fullscreen, so we still
-    -- have a border around fullscreen Firefox windows when there is another
-    -- window in the same workspace >:() and single windows
+    -- remove borders from fullscreen windows (does not work with Firefox)
     layoutHook = smartBorders $ fullscreenFull $ layoutHook gnomeConfig
 }
