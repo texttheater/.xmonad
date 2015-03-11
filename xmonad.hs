@@ -24,6 +24,7 @@ main = xmonad gnomeConfig {
         -- open programs on specific workspaces
         className =? "Thunderbird" --> doShift "1",
         className =? "Firefox" --> doShift "2",
+        className =? "Mnemosyne" --> doShift "4",
         -- notice when well-behaved windows go fullscreen
 --      fullscreenManageHook, -- doesn't seem to be needed
         -- let fullscreen windows cover the Gnome panels (needed for YouTube
