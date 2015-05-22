@@ -1,5 +1,6 @@
 import XMonad
 import XMonad.Config.Gnome
+import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
@@ -10,6 +11,10 @@ import qualified Data.Map as M
 -- http://ubuntuforums.org/showthread.php?t=2158104&p=12859037#post12859037
 myKeys (XConfig {modMask = mod4Mask}) = M.fromList $
     [ ((mod4Mask, xK_o), gnomeRun) ]
+
+-- fade inactive windows - requires xcompmgr to be running
+myLogHook = fadeInactiveLogHook fadeAmount
+    where fadeAmount = 0.7
 
 main = xmonad gnomeConfig {
     -- use Windows instead of Alt key
@@ -42,5 +47,8 @@ main = xmonad gnomeConfig {
         smartBorders $
         -- let fullscreen windows cover the Gnome panels (needed for Firefox)
         fullscreenFull $
-        layoutHook gnomeConfig
+        layoutHook gnomeConfig,
+    logHook = myLogHook,
+    -- get rid of ugly red
+    focusedBorderColor = "#888888"
 }
