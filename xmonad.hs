@@ -48,7 +48,10 @@ main = xmonad gnomeConfig {
         -- let fullscreen windows cover the Gnome panels (needed for Firefox)
         fullscreenFull $
         layoutHook gnomeConfig,
-    logHook = myLogHook,
+    logHook = composeAll [
+        logHook gnomeConfig,
+        myLogHook
+    ],
     -- get rid of ugly red
     focusedBorderColor = "#888888"
 }
