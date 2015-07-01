@@ -53,5 +53,6 @@ main = xmonad gnomeConfig {
         myLogHook
     ],
     -- get rid of ugly red
-    focusedBorderColor = "#888888"
+    focusedBorderColor = "#FFFFFF",
+    borderWidth = 1
 }
