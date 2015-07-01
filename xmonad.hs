@@ -28,7 +28,7 @@ main = xmonad gnomeConfig {
         manageHook gnomeConfig,
         -- open programs on specific workspaces
         className =? "Thunderbird" --> doShift "1",
-        className =? "Firefox" --> doShift "2",
+        className =? "Chromium-browser" --> doShift "2",
         className =? "Mnemosyne" --> doShift "4",
         -- notice when well-behaved windows go fullscreen
 --      fullscreenManageHook, -- doesn't seem to be needed
