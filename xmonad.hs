@@ -4,26 +4,22 @@ import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
+import XMonad.Util.EZConfig
 
 import qualified Data.Map as M
 
 -- use Win-o rather than Win-p for gnomeRun to work around this bug:
 -- http://ubuntuforums.org/showthread.php?t=2158104&p=12859037#post12859037
-myKeys (XConfig {modMask = mod4Mask}) = M.fromList $
+myKeys =
     [ ((mod4Mask, xK_o), gnomeRun) ]
 
 -- fade inactive windows - requires xcompmgr to be running
 myLogHook = fadeInactiveLogHook fadeAmount
     where fadeAmount = 0.7
 
-main = xmonad gnomeConfig {
+main = xmonad $ gnomeConfig {
     -- use Windows instead of Alt key
     modMask = mod4Mask,
-    -- add custom key bindings (see above)
-    keys = composeAll [
-        keys gnomeConfig,
-        myKeys
-    ],
     manageHook = composeAll [
         manageHook gnomeConfig,
         -- open programs on specific workspaces
@@ -55,4 +51,4 @@ main = xmonad gnomeConfig {
     -- get rid of ugly red
     focusedBorderColor = "#504F48",
     normalBorderColor = "#504F48"
-}
+} `additionalKeys` myKeys
