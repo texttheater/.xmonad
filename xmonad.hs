@@ -15,7 +15,7 @@ myKeys =
 
 -- fade inactive windows - requires xcompmgr to be running
 myLogHook = fadeInactiveLogHook fadeAmount
-    where fadeAmount = 0.7
+    where fadeAmount = 0.85
 
 main = xmonad $ gnomeConfig {
     -- use Windows instead of Alt key
