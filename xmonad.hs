@@ -8,10 +8,10 @@ import XMonad.Util.EZConfig
 
 import qualified Data.Map as M
 
--- use Win-o rather than Win-p for gnomeRun to work around this bug:
--- http://ubuntuforums.org/showthread.php?t=2158104&p=12859037#post12859037
-myKeys =
-    [ ((mod4Mask, xK_o), gnomeRun) ]
+myKeys = [
+    -- use Win-o rather than Win-p for gnomeRun to work around this bug:
+    -- http://ubuntuforums.org/showthread.php?t=2158104&p=12859037#post12859037
+    ((mod4Mask, xK_o), gnomeRun) ]
 
 -- fade inactive windows - requires xcompmgr to be running
 myLogHook = fadeInactiveLogHook fadeAmount
