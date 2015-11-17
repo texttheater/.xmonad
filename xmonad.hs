@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.OnScreen
 import XMonad.Config.Gnome
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageHelpers
@@ -8,10 +9,24 @@ import XMonad.Util.EZConfig
 
 import qualified Data.Map as M
 
-myKeys = [
+myKeys =
     -- use Win-o rather than Win-p for gnomeRun to work around this bug:
     -- http://ubuntuforums.org/showthread.php?t=2158104&p=12859037#post12859037
-    ((mod4Mask, xK_o), gnomeRun) ]
+    [ ((mod4Mask, xK_o), gnomeRun)
+    ]
+    ++
+    -- Always show workspaces 1-5 on screen 1, 6-9 on screen 2
+    let w = workspaces myConfig in
+    [ ((mod4Mask, xK_1), windows (viewOnScreen 0 (w!!0))),
+      ((mod4Mask, xK_2), windows (viewOnScreen 0 (w!!1))),
+      ((mod4Mask, xK_3), windows (viewOnScreen 0 (w!!2))),
+      ((mod4Mask, xK_4), windows (viewOnScreen 0 (w!!3))),
+      ((mod4Mask, xK_5), windows (viewOnScreen 0 (w!!4))),
+      ((mod4Mask, xK_6), windows (viewOnScreen 1 (w!!5))),
+      ((mod4Mask, xK_7), windows (viewOnScreen 1 (w!!6))),
+      ((mod4Mask, xK_8), windows (viewOnScreen 1 (w!!7))),
+      ((mod4Mask, xK_9), windows (viewOnScreen 1 (w!!8)))
+    ]
 
 -- fade inactive windows - requires xcompmgr to be running
 myLogHook = fadeInactiveLogHook fadeAmount
