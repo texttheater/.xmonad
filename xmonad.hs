@@ -20,7 +20,7 @@ screenForFirstGroup = 0
 -- TODO determine this dynamically using numberOfScreens. But HOW? ARGH,
 -- monads!
 screenForSecondGroup :: ScreenId
-screenForSecondGroup = 1
+screenForSecondGroup = 0
 
 myKeys =
     -- use Win-o rather than Win-p for gnomeRun to work around this bug:
