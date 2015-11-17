@@ -17,7 +17,7 @@ myKeys =
 myLogHook = fadeInactiveLogHook fadeAmount
     where fadeAmount = 0.85
 
-main = xmonad $ gnomeConfig {
+myConfig = gnomeConfig {
     -- use Windows instead of Alt key
     modMask = mod4Mask,
     manageHook = composeAll [
@@ -53,3 +53,5 @@ main = xmonad $ gnomeConfig {
     focusedBorderColor = "#504F48",
     normalBorderColor = "#504F48"
 } `additionalKeys` myKeys
+
+main = xmonad $ myConfig
