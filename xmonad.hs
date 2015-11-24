@@ -1,3 +1,5 @@
+import Graphics.X11.Xinerama (getScreenInfo)
+
 import XMonad
 import XMonad.Actions.OnScreen
 import XMonad.Config.Gnome
@@ -9,6 +11,17 @@ import XMonad.Util.EZConfig
 
 import qualified Data.Map as M
 
+numberOfScreens :: X Int  
+numberOfScreens = withDisplay (io.fmap length.getScreenInfo)
+
+screenForFirstGroup :: ScreenId
+screenForFirstGroup = 0
+
+-- TODO determine this dynamically using numberOfScreens. But HOW? ARGH,
+-- monads!
+screenForSecondGroup :: ScreenId
+screenForSecondGroup = 0
+
 myKeys =
     -- use Win-o rather than Win-p for gnomeRun to work around this bug:
     -- http://ubuntuforums.org/showthread.php?t=2158104&p=12859037#post12859037
@@ -17,15 +30,15 @@ myKeys =
     ++
     -- Always show workspaces 1-5 on screen 1, 6-9 on screen 2
     let w = workspaces myConfig in
-    [ ((mod4Mask, xK_1), windows (viewOnScreen 0 (w!!0))),
-      ((mod4Mask, xK_2), windows (viewOnScreen 0 (w!!1))),
-      ((mod4Mask, xK_3), windows (viewOnScreen 0 (w!!2))),
-      ((mod4Mask, xK_4), windows (viewOnScreen 0 (w!!3))),
-      ((mod4Mask, xK_5), windows (viewOnScreen 0 (w!!4))),
-      ((mod4Mask, xK_6), windows (viewOnScreen 1 (w!!5))),
-      ((mod4Mask, xK_7), windows (viewOnScreen 1 (w!!6))),
-      ((mod4Mask, xK_8), windows (viewOnScreen 1 (w!!7))),
-      ((mod4Mask, xK_9), windows (viewOnScreen 1 (w!!8)))
+    [ ((mod4Mask, xK_1), windows (viewOnScreen screenForFirstGroup (w!!0))),
+      ((mod4Mask, xK_2), windows (viewOnScreen screenForFirstGroup (w!!1))),
+      ((mod4Mask, xK_3), windows (viewOnScreen screenForFirstGroup (w!!2))),
+      ((mod4Mask, xK_4), windows (viewOnScreen screenForFirstGroup (w!!3))),
+      ((mod4Mask, xK_5), windows (viewOnScreen screenForFirstGroup (w!!4))),
+      ((mod4Mask, xK_6), windows (viewOnScreen screenForSecondGroup (w!!5))),
+      ((mod4Mask, xK_7), windows (viewOnScreen screenForSecondGroup (w!!6))),
+      ((mod4Mask, xK_8), windows (viewOnScreen screenForSecondGroup (w!!7))),
+      ((mod4Mask, xK_9), windows (viewOnScreen screenForSecondGroup (w!!8)))
     ]
 
 -- fade inactive windows - requires xcompmgr to be running
@@ -41,6 +54,7 @@ myConfig = gnomeConfig {
         className =? "Thunderbird" --> doShift "1",
         className =? "Evince" --> doShift "6",
         className =? "Google-chrome" --> doShift "7",
+        className =? "google-chrome" --> doShift "7",
         className =? "Google-chrome-stable" --> doShift "7",
         className =? "Chromium-browser" --> doShift "7",
         className =? "Mnemosyne" --> doShift "4",
