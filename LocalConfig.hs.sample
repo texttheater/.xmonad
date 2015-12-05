@@ -1,0 +1,14 @@
+module LocalConfig (
+    screenForFirstGroup,
+    screenForSecondGroup
+) where
+
+-- Sample configuration for two screens
+
+import XMonad
+
+screenForFirstGroup :: ScreenId
+screenForFirstGroup = 0
+
+screenForSecondGroup :: ScreenId
+screenForSecondGroup = 1

@@ -1,5 +1,7 @@
 import Graphics.X11.Xinerama (getScreenInfo)
 
+import LocalConfig
+
 import XMonad
 import XMonad.Actions.OnScreen
 import XMonad.Config.Gnome
@@ -10,17 +12,6 @@ import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
 
 import qualified Data.Map as M
-
-numberOfScreens :: X Int  
-numberOfScreens = withDisplay (io.fmap length.getScreenInfo)
-
-screenForFirstGroup :: ScreenId
-screenForFirstGroup = 0
-
--- TODO determine this dynamically using numberOfScreens. But HOW? ARGH,
--- monads!
-screenForSecondGroup :: ScreenId
-screenForSecondGroup = 0
 
 myKeys =
     -- use Win-o rather than Win-p for gnomeRun to work around this bug:
