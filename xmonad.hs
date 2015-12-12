@@ -1,5 +1,3 @@
-import Graphics.X11.Xinerama (getScreenInfo)
-
 import LocalConfig
 
 import XMonad
