@@ -71,7 +71,9 @@ myConfig = gnomeConfig {
     ],
     -- get rid of ugly red
     focusedBorderColor = "#504F48",
-    normalBorderColor = "#504F48"
+    normalBorderColor = "#504F48",
+    -- focus follows mouse
+    focusFollowsMouse = True
 } `additionalKeys` myKeys
 
 main = xmonad $ myConfig
