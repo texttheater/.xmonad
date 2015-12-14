@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "$DESKTOP_SESSION" == "gnome-fallback" ]
+then
+	xmonad --replace &
+	xcompmgr -n & # for FadeInactive to work
+fi
