@@ -1,5 +1,6 @@
 .xmonad
 =======
 
-My XMonad configuration, using Ubuntu's "Gnome with XMonad" session on 12.04
-and 14.04.
+My XMonad configuration. I use Ubuntu 14.04’s GNOME Flashback (Metacity)
+session and have it run the included script `autostart-replace-windowmanager`
+on login (configured via `gnome-session-properties`) to start XMonad.
