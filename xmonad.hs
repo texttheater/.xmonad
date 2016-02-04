@@ -45,7 +45,7 @@ myConfig = gnomeConfig {
         className =? "Google-chrome" --> doShift "2",
         className =? "google-chrome" --> doShift "2",
         className =? "Google-chrome-stable" --> doShift "2",
-        className =? "Chromium-browser" --> doShift "7",
+        className =? "chromium-browser" --> doShift "7",
         className =? "Mnemosyne" --> doShift "4",
         className =? "update-manager" --> doShift "9",
         -- notice when well-behaved windows go fullscreen
