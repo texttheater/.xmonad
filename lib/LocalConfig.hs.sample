@@ -1,6 +1,7 @@
 module LocalConfig (
     screenForFirstGroup,
-    screenForSecondGroup
+    screenForSecondGroup,
+    screenForBrowser
 ) where
 
 -- Sample configuration for two screens
@@ -12,3 +13,6 @@ screenForFirstGroup = 0
 
 screenForSecondGroup :: ScreenId
 screenForSecondGroup = 1
+
+screenForBrowser :: [Char]
+screenForBrowser = "7"

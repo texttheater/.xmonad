@@ -42,10 +42,10 @@ myConfig = gnomeConfig {
         -- open programs on specific workspaces
         className =? "Thunderbird" --> doShift "1",
         className =? "Evince" --> doShift "6",
-        className =? "Google-chrome" --> doShift "2",
-        className =? "google-chrome" --> doShift "2",
-        className =? "Google-chrome-stable" --> doShift "2",
-        className =? "chromium-browser" --> doShift "7",
+        className =? "Google-chrome" --> doShift screenForBrowser,
+        className =? "google-chrome" --> doShift screenForBrowser,
+        className =? "Google-chrome-stable" --> doShift screenForBrowser,
+        className =? "chromium-browser" --> doShift screenForBrowser,
         className =? "Mnemosyne" --> doShift "4",
         className =? "update-manager" --> doShift "9",
         -- notice when well-behaved windows go fullscreen
