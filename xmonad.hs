@@ -35,7 +35,7 @@ myKeys =
 
 -- fade inactive windows - requires xcompmgr to be running
 myLogHook = fadeInactiveLogHook fadeAmount
-    where fadeAmount = 0.85
+    where fadeAmount = 1 -- for now, don't fade; full opacity
 
 myConfig = gnomeConfig {
     -- use Windows instead of Alt key
@@ -75,9 +75,11 @@ myConfig = gnomeConfig {
         logHook gnomeConfig,
         myLogHook
     ],
-    -- get rid of ugly red
+    -- Ubuntu colors
     focusedBorderColor = "#504F48",
-    normalBorderColor = "#504F48",
+    normalBorderColor = "#3C3B37",
+    -- actually, don't show borders
+    borderWidth = 0,
     -- focus follows mouse
     focusFollowsMouse = True
 } `additionalKeys` myKeys
