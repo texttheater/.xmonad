@@ -18,6 +18,9 @@ myKeys =
     ]
     ++
     -- Always show workspaces 1-5 on screen 1, 6-9 on screen 2
+    -- FIXME does not work when the workspace is switched programmatically,
+    -- e.g. when a browser opens a link with an external program which is tied
+    -- to a particular workspace (see below)
     let w = workspaces myConfig in
     [ ((mod4Mask, xK_1), windows (viewOnScreen screenForFirstGroup (w!!0))),
       ((mod4Mask, xK_2), windows (viewOnScreen screenForFirstGroup (w!!1))),
