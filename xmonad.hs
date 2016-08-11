@@ -41,6 +41,7 @@ myConfig = gnomeConfig {
         manageHook gnomeConfig,
         -- open programs on specific workspaces
         className =? "Thunderbird" --> doShift "1",
+        className =? "Geary" --> doShift "1",
         className =? "Evince" --> doShift "6",
         className =? "Google-chrome" --> doShift screenForBrowser,
         className =? "google-chrome" --> doShift screenForBrowser,
