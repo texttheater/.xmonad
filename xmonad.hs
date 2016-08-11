@@ -18,6 +18,9 @@ myKeys =
     ]
     ++
     -- Always show workspaces 1-5 on screen 1, 6-9 on screen 2
+    -- FIXME does not work when the workspace is switched programmatically,
+    -- e.g. when a browser opens a link with an external program which is tied
+    -- to a particular workspace (see below)
     let w = workspaces myConfig in
     [ ((mod4Mask, xK_1), windows (viewOnScreen screenForFirstGroup (w!!0))),
       ((mod4Mask, xK_2), windows (viewOnScreen screenForFirstGroup (w!!1))),
@@ -32,7 +35,7 @@ myKeys =
 
 -- fade inactive windows - requires xcompmgr to be running
 myLogHook = fadeInactiveLogHook fadeAmount
-    where fadeAmount = 0.85
+    where fadeAmount = 1 -- for now, don't fade; full opacity
 
 myConfig = gnomeConfig {
     -- use Windows instead of Alt key
@@ -43,11 +46,12 @@ myConfig = gnomeConfig {
         className =? "Thunderbird" --> doShift "1",
         className =? "Geary" --> doShift "1",
         className =? "Evince" --> doShift "6",
+        className =? "Okular" --> doShift "6",
         className =? "Google-chrome" --> doShift screenForBrowser,
         className =? "google-chrome" --> doShift screenForBrowser,
         className =? "Google-chrome-stable" --> doShift screenForBrowser,
         className =? "chromium-browser" --> doShift screenForBrowser,
-        className =? "Mnemosyne" --> doShift "4",
+        className =? "Mendeley Desktop" --> doShift "8",
         className =? "update-manager" --> doShift "9",
         -- notice when well-behaved windows go fullscreen
 --      fullscreenManageHook, -- doesn't seem to be needed
@@ -71,9 +75,11 @@ myConfig = gnomeConfig {
         logHook gnomeConfig,
         myLogHook
     ],
-    -- get rid of ugly red
+    -- Ubuntu colors
     focusedBorderColor = "#504F48",
-    normalBorderColor = "#504F48",
+    normalBorderColor = "#3C3B37",
+    -- actually, don't show borders
+    borderWidth = 0,
     -- focus follows mouse
     focusFollowsMouse = True
 } `additionalKeys` myKeys
