@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$DESKTOP_SESSION" == "gnome-fallback" || "$DESKTOP_SESSION" == "gnome-flashback-metacity" ]
+if [[ "$DESKTOP_SESSION" == "gnome-fallback" || "$DESKTOP_SESSION" == "gnome-flashback-metacity" ]]
 then
 	xmonad --replace &
 	xcompmgr -n & # for FadeInactive to work
