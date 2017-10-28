@@ -52,10 +52,12 @@ myConfig = gnomeConfig {
         className =? "Google-chrome-stable" --> doShift screenForBrowser,
         className =? "chromium-browser" --> doShift screenForBrowser,
         className =? "Chromium-browser" --> doShift screenForBrowser,
+        className =? "Firefox" --> doShift screenForBrowser,
         className =? "Mendeley Desktop" --> doShift "8",
         className =? "update-manager" --> doShift "9",
         className =? "Update-manager" --> doShift "9",
         className =? "Steam" --> doShift "9",
+        className =? "Deluge" --> doShift "9",
         -- notice when well-behaved windows go fullscreen
 --      fullscreenManageHook, -- doesn't seem to be needed
         -- let fullscreen windows cover the Gnome panels (needed for YouTube
