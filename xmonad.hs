@@ -8,13 +8,15 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
+import XMonad.Util.Run
 
 import qualified Data.Map as M
 
 myKeys =
     -- use Win-o rather than Win-p for gnomeRun to work around this bug:
     -- http://ubuntuforums.org/showthread.php?t=2158104&p=12859037#post12859037
-    [ ((mod4Mask, xK_o), gnomeRun)
+    [ ((mod4Mask, xK_t), safeSpawn "thunderbird" []),
+      ((mod4Mask, xK_f), safeSpawn "chromium-browser" [])
     ]
     ++
     -- Always show workspaces 1-5 on screen 1, 6-9 on screen 2
