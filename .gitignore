@@ -6,3 +6,4 @@
 *.o
 *~
 /lib/LocalConfig.hs
+/xmonad.state
