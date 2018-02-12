@@ -5,6 +5,7 @@ import XMonad.Actions.OnScreen
 import XMonad.Config.Gnome
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
@@ -40,6 +41,10 @@ myLogHook = fadeInactiveLogHook fadeAmount
 myConfig = gnomeConfig {
     -- use Windows instead of Alt key
     modMask = mod4Mask,
+    startupHook = composeAll [
+        startupHook gnomeConfig,
+        setFullscreenSupported
+    ],
     manageHook = composeAll [
         manageHook gnomeConfig,
         -- open programs on specific workspaces
@@ -88,5 +93,25 @@ myConfig = gnomeConfig {
     -- focus follows mouse
     focusFollowsMouse = True
 } `additionalKeys` myKeys
+
+setFullscreenSupported :: X ()
+setFullscreenSupported = withDisplay $ \dpy -> do
+    r <- asks theRoot
+    a <- getAtom "_NET_SUPPORTED"
+    c <- getAtom "ATOM"
+    supp <- mapM getAtom ["_NET_WM_STATE_HIDDEN"
+                         ,"_NET_WM_STATE_FULLSCREEN" -- XXX Copy-pasted to add this line
+                         ,"_NET_NUMBER_OF_DESKTOPS"
+                         ,"_NET_CLIENT_LIST"
+                         ,"_NET_CLIENT_LIST_STACKING"
+                         ,"_NET_CURRENT_DESKTOP"
+                         ,"_NET_DESKTOP_NAMES"
+                         ,"_NET_ACTIVE_WINDOW"
+                         ,"_NET_WM_DESKTOP"
+                         ,"_NET_WM_STRUT"
+                         ]
+    io $ changeProperty32 dpy r a c propModeReplace (fmap fromIntegral supp)
+
+    setWMName "xmonad"
 
 main = xmonad $ myConfig
